@@ -1,0 +1,174 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hola
+    - buenas
+    - qué tal
+    - buenos días
+    - hey
+
+- intent: goodbye
+  examples: |
+    - adiós
+    - hasta luego
+    - chao
+    - nos vemos
+
+- intent: affirm
+  examples: |
+    - sí
+    - si
+    - correcto
+    - por supuesto
+    - afirmativo
+    - claro que sí
+    - exacto
+
+- intent: deny
+  examples: |
+    - no
+    - para nada
+    - negativo
+    - nunca
+    - qué va
+
+- intent: bot_challenge
+  examples: |
+    - ¿eres un bot?
+    - ¿eres un robot?
+    - ¿hablo con una persona o con un programa?
+
+- intent: iniciar_test
+  examples: |
+    - quiero empezar el test
+    - comenzar diagnóstico
+    - ayúdame a saber si soy adicto
+    - quiero hacer la prueba
+    - empecemos
+    - comencemos
+    - empieza
+    - comienza
+
+- intent: admitir_problema
+  examples: |
+    - creo que tengo un problema
+    - paso demasiado tiempo en [instagram](red_social)
+    - estoy enganchado a [TikTok](red_social)
+    - no puedo dejar de mirar el móvil
+
+- intent: negar_problema
+  examples: |
+    - yo no tengo ningún problema
+    - lo controlo perfectamente
+    - solo uso [facebook](red_social) un rato
+    - no soy un adicto
+
+- intent: expresar_sentimiento_negativo
+  examples: |
+    - me siento [ansioso](sentimiento) cuando no tengo el móvil
+    - me pongo [triste](sentimiento) si no tengo likes
+    - me da [ansiedad](sentimiento) no estar conectado
+    - siento que me pierdo de cosas (FOMO)
+    - me siento [solo](sentimiento) a veces
+    - me comparo mucho con los demás y me siento [inferior](sentimiento)
+    - me genera [estrés](sentimiento)
+
+- intent: expresar_impacto_vida
+  examples: |
+    - me distraigo mucho en el trabajo por culpa de [twitter](red_social)
+    - he dejado de hacer mis hobbies
+    - duermo menos por estar con el móvil
+    - afecta a mis estudios
+    - mis notas han bajado
+    - no presto atención a mi familia
+
+- intent: reportar_tiempo_uso
+  examples: |
+    - paso como [unas 5 horas](duracion) al día
+    - estoy conectado [casi todo el día](duracion)
+    - lo miro [cada 10 minutos](frecuencia)
+    - lo primero que hago al despertar es mirar [TikTok](red_social)
+    - uso [instagram](red_social) por [más de 3 horas](duracion)
+    - ayer estuve [45 minutos](duracion) viendo reels
+
+- intent: reportar_tiempo_uso
+  examples: |
+    - paso [mucho tiempo](duracion_relativa) en las redes
+    - estoy conectado [todo el día](duracion_relativa)
+    - lo uso unas [cinco horas](duracion_relativa) diarias
+    - más de [3 horas](duracion_relativa)
+    - unas [pocas horas](duracion_relativa)
+    - solo [un rato](duracion_relativa)
+    - lo miro [a cada rato](frecuencia)
+    - lo reviso [constantemente](frecuencia)
+    - entro [cada 10 minutos](frecuencia) a [instagram](red_social)
+    - lo primero que hago es mirar el móvil
+
+- intent: pedir_recomendaciones
+  examples: |
+    - sí, dame las recomendaciones
+    - claro, dame los consejos
+    - me gustaría recibir las recomendaciones
+    - cuáles son esas recomendaciones
+    - ok, dime qué puedo hacer
+    - sí, me gustaría saber más
+    - vale, a ver
+    - adelante con los consejos
+    - si, por favor
+
+# Agregamos lookup tables para ayudar a Rasa a reconocer estas expresiones
+- lookup: duracion_relativa
+  examples: |
+    - mucho tiempo
+    - bastante tiempo
+    - todo el día
+    - varias horas
+    - un par de horas
+    - pocas horas
+    - un rato
+    - 1 hora
+    - 2 horas
+    - 3 horas
+    - 4 horas
+    - 5 horas
+    - 6 horas
+
+- lookup: frecuencia
+  examples: |
+    - constantemente
+    - siempre
+    - a menudo
+    - a cada rato
+    - cada 5 minutos
+    - cada 10 minutos
+    - cada media hora
+    - muy seguido
+
+# Lookup tables para ayudar a Rasa a reconocer entidades de una lista
+- lookup: red_social
+  examples: |
+    - Facebook
+    - Instagram
+    - TikTok
+    - Twitter
+    - X
+    - Snapchat
+    - YouTube
+    - Pinterest
+    - LinkedIn
+    - Reddit
+
+- lookup: sentimiento
+  examples: |
+    - ansioso
+    - triste
+    - solo
+    - deprimido
+    - inferior
+    - culpable
+    - estresado
+    - frustrado
+    - vacío
+    

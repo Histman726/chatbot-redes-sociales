@@ -1,0 +1,18 @@
+[
+  {
+    "name": "duracion_relativa",
+    "pattern": "(\\bmucho\\ tiempo\\b|\\bbastante\\ tiempo\\b|\\btodo\\ el\\ día\\b|\\bvarias\\ horas\\b|\\bun\\ par\\ de\\ horas\\b|\\bpocas\\ horas\\b|\\bun\\ rato\\b|\\b1\\ hora\\b|\\b2\\ horas\\b|\\b3\\ horas\\b|\\b4\\ horas\\b|\\b5\\ horas\\b|\\b6\\ horas\\b)"
+  },
+  {
+    "name": "frecuencia",
+    "pattern": "(\\bconstantemente\\b|\\bsiempre\\b|\\ba\\ menudo\\b|\\ba\\ cada\\ rato\\b|\\bcada\\ 5\\ minutos\\b|\\bcada\\ 10\\ minutos\\b|\\bcada\\ media\\ hora\\b|\\bmuy\\ seguido\\b)"
+  },
+  {
+    "name": "red_social",
+    "pattern": "(\\bFacebook\\b|\\bInstagram\\b|\\bTikTok\\b|\\bTwitter\\b|\\bX\\b|\\bSnapchat\\b|\\bYouTube\\b|\\bPinterest\\b|\\bLinkedIn\\b|\\bReddit\\b)"
+  },
+  {
+    "name": "sentimiento",
+    "pattern": "(\\bansioso\\b|\\btriste\\b|\\bsolo\\b|\\bdeprimido\\b|\\binferior\\b|\\bculpable\\b|\\bestresado\\b|\\bfrustrado\\b|\\bvacío\\b)"
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-duracion",
+      "2": "I-duracion",
+      "3": "L-duracion",
+      "4": "U-duracion",
+      "5": "B-duracion_relativa",
+      "6": "I-duracion_relativa",
+      "7": "L-duracion_relativa",
+      "8": "U-duracion_relativa",
+      "9": "B-frecuencia",
+      "10": "I-frecuencia",
+      "11": "L-frecuencia",
+      "12": "U-frecuencia",
+      "13": "B-red_social",
+      "14": "I-red_social",
+      "15": "L-red_social",
+      "16": "U-red_social",
+      "17": "B-sentimiento",
+      "18": "I-sentimiento",
+      "19": "L-sentimiento",
+      "20": "U-sentimiento",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-duracion": 1,
+      "I-duracion": 2,
+      "L-duracion": 3,
+      "U-duracion": 4,
+      "B-duracion_relativa": 5,
+      "I-duracion_relativa": 6,
+      "L-duracion_relativa": 7,
+      "U-duracion_relativa": 8,
+      "B-frecuencia": 9,
+      "I-frecuencia": 10,
+      "L-frecuencia": 11,
+      "U-frecuencia": 12,
+      "B-red_social": 13,
+      "I-red_social": 14,
+      "L-red_social": 15,
+      "U-red_social": 16,
+      "B-sentimiento": 17,
+      "I-sentimiento": 18,
+      "L-sentimiento": 19,
+      "U-sentimiento": 20,
+      "O": 0
+    },
+    "num_tags": 21
+  }
+]

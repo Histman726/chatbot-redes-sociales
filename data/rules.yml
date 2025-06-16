@@ -1,0 +1,58 @@
+- rule: Saludar al usuario
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+# --- NUEVA REGLA PARA SOLUCIONAR EL PROBLEMA ---
+- rule: Iniciar el test después de un saludo y una afirmación
+  # Esta regla se activa si el bot acaba de saludar (y preguntar si se quiere empezar)
+  # y el usuario responde afirmativamente.
+  condition:
+  - slot_was_set:
+    - session_started: true # Condición general para asegurarse de que la sesión está activa
+  steps:
+  - intent: affirm
+  - action: utter_empecemos_test
+  - action: diagnostic_form
+  - active_loop: diagnostic_form
+
+# --- REGLA EXISTENTE PARA INICIAR DIRECTAMENTE ---
+- rule: Iniciar el test cuando el usuario lo pide directamente
+  steps:
+  - intent: iniciar_test
+  - action: utter_empecemos_test
+  - action: diagnostic_form
+  - active_loop: diagnostic_form
+
+- rule: Enviar formulario y dar diagnóstico
+  condition:
+  - active_loop: diagnostic_form
+  steps:
+  - action: diagnostic_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_calcular_diagnostico # Esta acción AHORA solo dará el diagnóstico y preguntará.
+
+# NUEVA REGLA: Si el usuario pide recomendaciones, se las damos.
+- rule: Dar recomendaciones cuando se piden después de la pregunta
+  # Esta condición asegura que la regla SÓLO se active si el bot acaba de preguntar
+  condition:
+  - active_loop: null
+  - slot_was_set:
+      - puntuacion_diagnostico > 1.0 # Asegura que ya se hizo un diagnóstico no-bajo
+  steps:
+  - or: # El usuario puede expresar la intención de dos maneras
+    - intent: pedir_recomendaciones
+    - intent: affirm
+  - action: action_dar_recomendaciones
+
+# NUEVA REGLA: Si el usuario NO quiere recomendaciones, nos despedimos.
+- rule: No dar recomendaciones si se niegan después de la pregunta
+  condition:
+    - active_loop: null
+    - slot_was_set:
+        - puntuacion_diagnostico > 1.0
+  steps:
+    - intent: deny
+    - action: utter_goodbye

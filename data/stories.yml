@@ -1,0 +1,89 @@
+version: "3.1"
+
+stories:
+
+- story: Camino feliz con recomendaciones aceptadas
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: iniciar_test
+  - action: diagnostic_form
+  - active_loop: diagnostic_form
+  - active_loop: null
+  - action: action_calcular_diagnostico # Da diagnóstico y pregunta
+  - intent: pedir_recomendaciones        # Usuario dice que sí
+  - action: action_dar_recomendaciones  # Se dan las recomendaciones
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: Camino con recomendaciones rechazadas
+  steps:
+  - intent: iniciar_test
+  - action: diagnostic_form
+  - active_loop: diagnostic_form
+  - active_loop: null
+  - action: action_calcular_diagnostico # Da diagnóstico y pregunta
+  - intent: deny                       # Usuario dice que no
+  - action: utter_goodbye               # El bot se despide cortésmente
+
+- story: Usuario admite un problema y luego hace el test
+  steps:
+  - intent: admitir_problema
+    entities:
+    - red_social: "instagram"
+  - action: utter_gracias_por_compartir # Muestra empatía
+  - intent: affirm # El usuario dice "sí" a la pregunta de si quiere hacer el test
+  - action: utter_empecemos_test
+  - action: diagnostic_form
+  - active_loop: diagnostic_form
+
+- story: Manejar una interrupción durante el test
+  steps:
+  - intent: iniciar_test
+  - action: utter_empecemos_test
+  - action: diagnostic_form
+  - active_loop: diagnostic_form
+  # El usuario está en medio del formulario y pregunta...
+  - intent: bot_challenge
+  - action: utter_iamabot
+  # El bot responde y VUELVE al formulario para continuar donde lo dejó.
+  - action: diagnostic_form
+  - active_loop: diagnostic_form
+
+- story: Usuario se despide en medio del test (interrupción con final)
+  steps:
+  - intent: iniciar_test
+  - action: utter_empecemos_test
+  - action: diagnostic_form
+  - active_loop: diagnostic_form
+  # El usuario decide irse
+  - intent: goodbye
+  - action: utter_goodbye
+  # Se detiene el formulario y la conversación
+  - action: action_deactivate_loop
+  - active_loop: null
+
+- story: Usuario niega algo fuera del test
+  steps:
+  - intent: deny # por ejemplo, el bot pregunta "¿Quieres ayuda?" y el usuario dice "no"
+  - action: utter_goodbye # o cualquier otra respuesta apropiada
+
+- story: Usuario expresa un sentimiento negativo
+  steps:
+  - intent: expresar_sentimiento_negativo
+  - action: utter_gracias_por_compartir # Una respuesta de empatía es perfecta aquí
+
+- story: Usuario habla del impacto en su vida
+  steps:
+  - intent: expresar_impacto_vida
+  - action: utter_gracias_por_compartir
+
+- story: Usuario niega tener un problema
+  steps:
+  - intent: negar_problema
+  - action: utter_please_rephrase # o una respuesta como "Entiendo, cada uno tiene su ritmo."
+
+- story: Usuario reporta tiempo de uso
+  steps:
+  - intent: reportar_tiempo_uso
+  - action: utter_gracias_por_compartir

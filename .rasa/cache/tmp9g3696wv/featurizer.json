@@ -1,0 +1,79 @@
+{
+  "type": "MaxHistoryTrackerFeaturizer",
+  "state_featurizer": {
+    "action_texts": [],
+    "entity_tag_specs": [],
+    "feature_states": {
+      "intent": {
+        "admitir_problema": 0,
+        "affirm": 1,
+        "back": 2,
+        "bot_challenge": 3,
+        "deny": 4,
+        "expresar_impacto_vida": 5,
+        "expresar_sentimiento_negativo": 6,
+        "goodbye": 7,
+        "greet": 8,
+        "iniciar_test": 9,
+        "negar_problema": 10,
+        "nlu_fallback": 11,
+        "out_of_scope": 12,
+        "pedir_recomendaciones": 13,
+        "reportar_tiempo_uso": 14,
+        "restart": 15,
+        "session_start": 16
+      },
+      "action_name": {
+        "action_listen": 0,
+        "action_restart": 1,
+        "action_session_start": 2,
+        "action_default_fallback": 3,
+        "action_deactivate_loop": 4,
+        "action_revert_fallback_events": 5,
+        "action_default_ask_affirmation": 6,
+        "action_default_ask_rephrase": 7,
+        "action_two_stage_fallback": 8,
+        "action_unlikely_intent": 9,
+        "action_back": 10,
+        "...": 11,
+        "action_extract_slots": 12,
+        "action_calcular_diagnostico": 13,
+        "action_dar_recomendaciones": 14,
+        "utter_ask_recomendaciones": 15,
+        "utter_ask_respuesta_abstinencia": 16,
+        "utter_ask_respuesta_conflicto": 17,
+        "utter_ask_respuesta_preocupacion": 18,
+        "utter_ask_respuesta_tolerancia": 19,
+        "utter_diagnostico_alto": 20,
+        "utter_diagnostico_final_ayuda": 21,
+        "utter_diagnostico_moderado": 22,
+        "utter_empecemos_test": 23,
+        "utter_goodbye": 24,
+        "utter_gracias_por_compartir": 25,
+        "utter_greet": 26,
+        "utter_iamabot": 27,
+        "utter_please_rephrase": 28,
+        "utter_recomendacion_hobbies": 29,
+        "utter_recomendacion_horarios": 30,
+        "utter_recomendacion_notificaciones": 31,
+        "utter_recomendacion_zonas_libres": 32,
+        "utter_recomendaciones_generales": 33,
+        "diagnostic_form": 34
+      },
+      "entities": {
+        "duracion_relativa": 0,
+        "frecuencia": 1,
+        "red_social": 2,
+        "sentimiento": 3
+      },
+      "slots": {
+        "red_social_0": 0
+      },
+      "active_loop": {
+        "diagnostic_form": 0
+      }
+    }
+  },
+  "remove_duplicates": true,
+  "max_history": 5
+}

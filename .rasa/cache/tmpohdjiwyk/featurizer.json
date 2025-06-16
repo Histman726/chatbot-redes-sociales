@@ -1,0 +1,79 @@
+{
+  "type": "MaxHistoryTrackerFeaturizer",
+  "state_featurizer": {
+    "action_texts": [],
+    "entity_tag_specs": [],
+    "feature_states": {
+      "intent": {
+        "admitir_problema": 0,
+        "affirm": 1,
+        "back": 2,
+        "bot_challenge": 3,
+        "deny": 4,
+        "expresar_impacto_vida": 5,
+        "expresar_sentimiento_negativo": 6,
+        "goodbye": 7,
+        "greet": 8,
+        "iniciar_test": 9,
+        "negar_problema": 10,
+        "nlu_fallback": 11,
+        "out_of_scope": 12,
+        "reportar_tiempo_uso": 13,
+        "restart": 14,
+        "session_start": 15
+      },
+      "action_name": {
+        "action_listen": 0,
+        "action_restart": 1,
+        "action_session_start": 2,
+        "action_default_fallback": 3,
+        "action_deactivate_loop": 4,
+        "action_revert_fallback_events": 5,
+        "action_default_ask_affirmation": 6,
+        "action_default_ask_rephrase": 7,
+        "action_two_stage_fallback": 8,
+        "action_unlikely_intent": 9,
+        "action_back": 10,
+        "...": 11,
+        "action_extract_slots": 12,
+        "action_calcular_diagnostico": 13,
+        "utter_ask_respuesta_abstinencia": 14,
+        "utter_ask_respuesta_conflicto": 15,
+        "utter_ask_respuesta_preocupacion": 16,
+        "utter_ask_respuesta_tolerancia": 17,
+        "utter_diagnostico_alto": 18,
+        "utter_diagnostico_bajo": 19,
+        "utter_diagnostico_moderado": 20,
+        "utter_empecemos_test": 21,
+        "utter_goodbye": 22,
+        "utter_gracias_por_compartir": 23,
+        "utter_greet": 24,
+        "utter_iamabot": 25,
+        "utter_please_rephrase": 26,
+        "diagnostic_form": 27
+      },
+      "entities": {
+        "duracion_relativa": 0,
+        "frecuencia": 1,
+        "red_social": 2,
+        "sentimiento": 3
+      },
+      "slots": {
+        "red_social_0": 0,
+        "respuesta_preocupacion_0": 1,
+        "respuesta_preocupacion_1": 2,
+        "respuesta_tolerancia_0": 3,
+        "respuesta_tolerancia_1": 4,
+        "respuesta_abstinencia_0": 5,
+        "respuesta_abstinencia_1": 6,
+        "respuesta_conflicto_0": 7,
+        "respuesta_conflicto_1": 8
+      },
+      "active_loop": {
+        "diagnostic_form": 0
+      }
+    }
+  },
+  "remove_duplicates": true,
+  "max_history": 5
+}

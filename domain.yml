@@ -1,0 +1,168 @@
+version: "3.1"
+
+# 1. INTENTS: Lista de todas las intenciones que el bot debe reconocer.
+# Deben coincidir exactamente con las de nlu.yml.
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - bot_challenge
+  - iniciar_test
+  - admitir_problema
+  - negar_problema
+  - expresar_sentimiento_negativo
+  - expresar_impacto_vida
+  - reportar_tiempo_uso
+  - pedir_recomendaciones
+
+entities:
+  - red_social
+  - sentimiento
+  - duracion_relativa # <-- CAMBIO: Actualizamos la entidad
+  - frecuencia        # <-- CAMBIO: Actualizamos la entidad
+
+# domain.yml
+
+slots:
+  # Slot para guardar la red social que más usa el usuario (para personalizar mensajes)
+  red_social:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: red_social
+
+  # Slot para guardar la puntuación final del test
+  puntuacion_diagnostico:
+    type: float
+    initial_value: 0.0
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  respuesta_preocupacion:
+    type: any # Cambiamos a 'any' para tener más control
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: diagnostic_form
+            requested_slot: respuesta_preocupacion
+
+  respuesta_tolerancia:
+    type: any
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: diagnostic_form
+            requested_slot: respuesta_tolerancia
+
+  respuesta_abstinencia:
+    type: any
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: diagnostic_form
+            requested_slot: respuesta_abstinencia
+
+  respuesta_conflicto:
+    type: any
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: diagnostic_form
+            requested_slot: respuesta_conflicto
+  # ... (Aquí puedes agregar los slots sin duckling si los creaste)
+  duracion_reportada:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: duracion_relativa
+
+# 4. RESPONSES: Lo que el bot puede decir.
+responses:
+  # Respuestas básicas
+  utter_greet:
+    - text: "¡Hola! Soy tu asistente para evaluar el uso de redes sociales. ¿Te gustaría comenzar el test para entender mejor tus hábitos?"
+
+  utter_goodbye:
+    - text: "¡Hasta luego! Recuerda que tomar conciencia es el primer paso. ¡Cuídate!"
+
+  utter_iamabot:
+    - text: "Soy un bot creado con Rasa, diseñado para ayudarte a reflexionar sobre tu uso de las redes sociales."
+
+  utter_please_rephrase:
+    - text: "No te he entendido muy bien, ¿podrías decírmelo de otra forma?"
+
+  # Respuestas para el flujo del test
+  utter_empecemos_test:
+    - text: "¡Perfecto! Te haré 4 preguntas clave. Por favor, responde con sinceridad (un 'sí' o un 'no' es suficiente)."
+
+  # Preguntas del formulario de diagnóstico (basadas en criterios de adicción)
+  utter_ask_respuesta_preocupacion:
+    - text: "1. ¿Piensas en las redes sociales o sientes la necesidad de usarlas durante gran parte del día?"
+
+  utter_ask_respuesta_tolerancia:
+    - text: "2. ¿Sientes que necesitas pasar cada vez más tiempo en las redes sociales para sentirte satisfecho?"
+
+  utter_ask_respuesta_abstinencia:
+    - text: "3. ¿Te sientes inquieto, irritable o ansioso cuando no puedes usar las redes sociales?"
+
+  utter_ask_respuesta_conflicto:
+    - text: "4. ¿El uso que haces de las redes sociales ha causado problemas en tu trabajo, estudios o relaciones personales?"
+
+  # Respuestas de empatía
+  utter_gracias_por_compartir:
+    - text: "Gracias por compartir eso conmigo. Es valiente reconocerlo."
+
+  utter_ask_recomendaciones:
+    - text: "¿Te gustaría recibir algunas recomendaciones prácticas para manejar mejor tu tiempo en redes sociales?"
+
+    # Mantenemos las respuestas de recomendaciones
+  utter_recomendaciones_generales:
+    - text: "¡Claro! Aquí tienes algunas recomendaciones que han ayudado a muchas personas:"
+
+  utter_diagnostico_moderado:
+    - text: "Gracias. Tus respuestas sugieren que podrías estar en riesgo de desarrollar un hábito problemático. Es un buen momento para tomar algunas medidas preventivas."
+
+  utter_diagnostico_alto:
+    - text: "Entiendo. Según tus respuestas, tu relación con las redes sociales parece ser problemática y está afectando tu bienestar. Es importante que tomes acción. Considera hablar con un amigo, familiar o un profesional de la salud mental sobre esto."
+
+    # --- NUEVAS RESPUESTAS DE RECOMENDACIONES ---
+
+  utter_recomendacion_notificaciones:
+    - text: "📵 **Desactiva las notificaciones:** Ve a la configuración de tu teléfono y desactiva todas las notificaciones no esenciales de apps como Instagram, TikTok o Facebook. Esto elimina el impulso constante de revisar tu móvil."
+
+  utter_recomendacion_horarios:
+    - text: "⏰ **Establece horarios definidos:** Designa bloques de tiempo específicos para usar redes sociales (ej. 30 minutos después de almorzar) y mantén el móvil fuera de tu vista el resto del tiempo."
+
+  utter_recomendacion_zonas_libres:
+    - text: "🏠 **Crea zonas libres de móvil:** Decide que ciertas áreas, como tu dormitorio o la mesa donde comes, son zonas donde no se usa el móvil. Esto mejora el sueño y la interacción social."
+
+  utter_recomendacion_hobbies:
+    - text: "🎨 **Reemplaza el hábito:** Busca actividades que disfrutes y que no involucren una pantalla. Leer un libro, salir a caminar, practicar un deporte o aprender algo nuevo pueden llenar el vacío que deja el scrolling."
+
+  utter_diagnostico_final_ayuda:
+    - text: "Recuerda que tomar el control es un proceso. ¡Pequeños cambios pueden hacer una gran diferencia!"
+
+# 5. ACTIONS: Lista de todas las acciones que el bot puede realizar.
+# Incluye las respuestas (utter_) y las acciones personalizadas (custom actions).
+actions:
+  - action_calcular_diagnostico # Acción personalizada que crearemos en actions.py
+  - action_dar_recomendaciones
+
+# 6. FORMS: Definición de los formularios para recopilar datos.
+forms:
+  diagnostic_form:
+    # Lista de slots que el formulario debe rellenar
+    required_slots:
+      - respuesta_preocupacion
+      - respuesta_tolerancia
+      - respuesta_abstinencia
+      - respuesta_conflicto
+
+# 7. SESSION CONFIG: Cómo se manejan las sesiones de conversación.
+session_config:
+  session_expiration_time: 60  # La sesión termina después de 60 minutos de inactividad
+  carry_over_slots_to_new_session: true # Mantiene los slots si la sesión expira y el usuario vuelve
