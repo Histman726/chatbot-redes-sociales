@@ -1,82 +1,61 @@
-# The config recipe.
-# https://rasa.com/docs/rasa/model-configuration/
+# La receta del modelo (estándar para Rasa 3.x)
 recipe: default.v1
 
-# The assistant project unique identifier
-# This default value must be replaced with a unique assistant name within your deployment
-assistant_id: 20250616-120744-corporate-price
+# Identificador único de tu asistente (puedes cambiarlo si quieres)
+assistant_id: chatbot-adiccion-redes
 
-# Configuration for Rasa NLU.
-# https://rasa.com/docs/rasa/nlu/components/
+# Idioma de tu asistente
 language: es
 
+# --- Configuración del Pipeline de NLU ---
+# Aquí definimos, en orden, cómo se procesa el texto del usuario.
 pipeline:
-# # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
-# # If you'd like to customize it, uncomment and adjust the pipeline.
-# # See https://rasa.com/docs/rasa/tuning-your-model for more information.
-#   - name: WhitespaceTokenizer
-#   - name: RegexFeaturizer
-#   - name: LexicalSyntacticFeaturizer
-#   - name: CountVectorsFeaturizer
-#   - name: CountVectorsFeaturizer
-#     analyzer: char_wb
-#     min_ngram: 1
-#     max_ngram: 4
-#   - name: DIETClassifier
-#     epochs: 100
-#     constrain_similarities: true
-#   - name: EntitySynonymMapper
-#   - name: ResponseSelector
-#     epochs: 100
-#     constrain_similarities: true
-#   - name: FallbackClassifier
-#     threshold: 0.3
-#     ambiguity_threshold: 0.1
-# 1. Componente que faltaba: Tokenizer. Divide el texto en palabras.
-- name: WhitespaceTokenizer
+  # 1. Tokenizador: Divide el texto en palabras/tokens.
+  - name: WhitespaceTokenizer
 
-# 2. Featurizers: Convierten las palabras en vectores que el modelo puede entender.
-#    Estos ahora pueden funcionar porque el Tokenizer ya hizo su trabajo.
-- name: RegexFeaturizer
-- name: LexicalSyntacticFeaturizer
-- name: CountVectorsFeaturizer
-- name: CountVectorsFeaturizer
-  analyzer: "char_wb"
-  min_ngram: 1
-  max_ngram: 4
+  # 2. Featurizers: Crean representaciones numéricas del texto.
+  #    Estos deben ir DESPUÉS del Tokenizer.
+  - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: "char_wb"
+    min_ngram: 1
+    max_ngram: 4
 
-# 3. El clasificador principal que usa las características para predecir intenciones y entidades.
-- name: DIETClassifier
-  epochs: 100
-  entity_recognition: True
+  # 3. Clasificador principal: Usa las features para predecir intenciones y entidades.
+  - name: DIETClassifier
+    epochs: 100
+    entity_recognition: True
 
-# 4. Componentes adicionales para manejo de respuestas y fallbacks.
-- name: ResponseSelector
-  epochs: 100
-- name: FallbackClassifier
-  threshold: 0.3
-  ambiguity_threshold: 0.1
-- name: LexicalSyntacticFeaturizer
-- name: CountVectorsFeaturizer
-- name: CountVectorsFeaturizer
-  analyzer: char_wb
-  min_ngram: 1
-  max_ngram: 4
-- name: DIETClassifier
-  epochs: 100
+  # 4. Selector de respuestas: Se usa para chit-chat y FAQs.
+  #    También necesita los featurizers, por eso va después de ellos.
+  - name: ResponseSelector
+    epochs: 100
 
-# Configuration for Rasa Core.
-# https://rasa.com/docs/rasa/core/policies/
-policies: null
-# # No configuration for policies was provided. The following default policies were used to train your model.
-# # If you'd like to customize them, uncomment and adjust the policies.
-# # See https://rasa.com/docs/rasa/policies for more information.
-#   - name: MemoizationPolicy
-#   - name: RulePolicy
-#   - name: UnexpecTEDIntentPolicy
-#     max_history: 5
-#     epochs: 100
-#   - name: TEDPolicy
-#     max_history: 5
-#     epochs: 100
-#     constrain_similarities: true
+  # 5. Mapeador de sinónimos: Reemplaza sinónimos (ej. "NY" -> "New York").
+  - name: EntitySynonymMapper
+
+  # 6. Clasificador de fallback: Se activa si la confianza es muy baja.
+  - name: FallbackClassifier
+    threshold: 0.4
+    ambiguity_threshold: 0.1
+
+
+# --- Configuración de las Políticas de Core ---
+# Aquí definimos cómo el bot decide qué acción tomar a continuación.
+policies:
+  # 1. RulePolicy: Sigue las reglas de tu archivo rules.yml de forma estricta.
+  - name: RulePolicy
+    core_fallback_action_name: "action_default_fallback"
+    core_fallback_threshold: 0.4
+
+  # 2. MemoizationPolicy: Recuerda las conversaciones de tus stories.
+  - name: MemoizationPolicy
+    max_history: 5
+
+  # 3. TEDPolicy: Una red neuronal que generaliza a partir de tus stories
+  #    para manejar conversaciones que no ha visto antes.
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 100
