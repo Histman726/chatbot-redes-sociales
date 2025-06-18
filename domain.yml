@@ -72,6 +72,55 @@ slots:
         conditions:
           - active_loop: diagnostic_form
             requested_slot: respuesta_conflicto
+
+  respuesta_escape:
+    type: any
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: diagnostic_form
+            requested_slot: respuesta_escape
+
+  respuesta_perdida_interes:
+    type: any
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: diagnostic_form
+            requested_slot: respuesta_perdida_interes
+
+  respuesta_engano:
+    type: any
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: diagnostic_form
+            requested_slot: respuesta_engano
+
+  respuesta_riesgo:
+    type: any
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: diagnostic_form
+            requested_slot: respuesta_riesgo
+
+  respuesta_comparacion:
+    type: any
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: diagnostic_form
+            requested_slot: respuesta_comparacion
+
+  respuesta_uso_inmediato:
+    type: any
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: diagnostic_form
+            requested_slot: respuesta_uso_inmediato
+
   # ... (Aquí puedes agregar los slots sin duckling si los creaste)
   duracion_reportada:
     type: text
@@ -112,6 +161,36 @@ responses:
   utter_ask_respuesta_conflicto:
     - text: "4. ¿El uso que haces de las redes sociales ha causado problemas en tu trabajo, estudios o relaciones personales?"
 
+  # --- 6 NUEVAS PREGUNTAS ---
+  utter_ask_respuesta_escape:
+    - text: "5. ¿Usas las redes sociales para escapar de problemas o aliviar sentimientos negativos (como culpa, ansiedad, etc.)?"
+
+  utter_ask_respuesta_perdida_interes:
+    - text: "6. ¿Has perdido interés en hobbies o actividades que antes disfrutabas porque prefieres pasar ese tiempo en redes sociales?"
+
+  utter_ask_respuesta_engano:
+    - text: "7. ¿Has ocultado a tu familia o amigos la cantidad real de tiempo que pasas en las redes sociales?"
+
+  utter_ask_respuesta_riesgo:
+    - text: "8. ¿Has puesto en riesgo o perdido una relación importante, un trabajo o una oportunidad educativa por tu uso de las redes sociales?"
+
+  utter_ask_respuesta_comparacion:
+    - text: "9. ¿Te comparas frecuentemente con la vida de otros en redes sociales y te sientes insatisfecho/a con tu vida?"
+
+  utter_ask_respuesta_uso_inmediato:
+    - text: "10. ¿Revisar tus redes sociales es lo primero que haces al despertar y lo último que haces antes de dormir?"
+
+# --- NUEVOS DIAGNÓSTICOS ---
+  utter_diagnostico_sin_adiccion:
+    - text: "Basado en tus respuestas, tu uso de las redes sociales parece ser saludable y equilibrado. ¡Sigue así!"
+  utter_diagnostico_bajo:
+    - text: "Gracias. Tus respuestas indican un uso moderado, sin un impacto negativo evidente en tu vida. Es un buen punto de partida."
+  utter_diagnostico_medio:
+    - text: "Gracias. Tus respuestas sugieren que podrías tener algunas distracciones o una dependencia ocasional. Es un buen momento para tomar algunas medidas preventivas."
+  utter_diagnostico_alto:
+    - text: "Entiendo. Tus respuestas muestran señales claras de un impacto emocional o social. Es importante prestarle atención a estos hábitos."
+  utter_diagnostico_muy_alto:
+    - text: "Según tus respuestas, tu relación con las redes sociales parece ser compulsiva y con consecuencias significativas. Es muy importante que tomes acción. Considera hablar con un amigo, familiar o un profesional de la salud mental."
   # Respuestas de empatía
   utter_gracias_por_compartir:
     - text: "Gracias por compartir eso conmigo. Es valiente reconocerlo."
@@ -119,15 +198,6 @@ responses:
   utter_ask_recomendaciones:
     - text: "¿Te gustaría recibir algunas recomendaciones prácticas para manejar mejor tu tiempo en redes sociales?"
 
-    # Mantenemos las respuestas de recomendaciones
-  utter_recomendaciones_generales:
-    - text: "¡Claro! Aquí tienes algunas recomendaciones que han ayudado a muchas personas:"
-
-  utter_diagnostico_moderado:
-    - text: "Gracias. Tus respuestas sugieren que podrías estar en riesgo de desarrollar un hábito problemático. Es un buen momento para tomar algunas medidas preventivas."
-
-  utter_diagnostico_alto:
-    - text: "Entiendo. Según tus respuestas, tu relación con las redes sociales parece ser problemática y está afectando tu bienestar. Es importante que tomes acción. Considera hablar con un amigo, familiar o un profesional de la salud mental sobre esto."
 
     # --- NUEVAS RESPUESTAS DE RECOMENDACIONES ---
 
@@ -157,10 +227,17 @@ forms:
   diagnostic_form:
     # Lista de slots que el formulario debe rellenar
     required_slots:
+      # --- SLOTS ACTUALIZADOS (10 en total) ---
       - respuesta_preocupacion
       - respuesta_tolerancia
       - respuesta_abstinencia
       - respuesta_conflicto
+      - respuesta_escape
+      - respuesta_perdida_interes
+      - respuesta_engano
+      - respuesta_riesgo
+      - respuesta_comparacion
+      - respuesta_uso_inmediato
 
 # 7. SESSION CONFIG: Cómo se manejan las sesiones de conversación.
 session_config:

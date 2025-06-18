@@ -10,6 +10,13 @@
 <body>
 
     <div id="chat-container">
+        <div id="progress-container" style="display: none;">
+            <p id="progress-text">Pregunta 1 de 10</p>
+            <div id="progress-bar-background">
+                <div id="progress-bar-foreground"></div>
+            </div>
+        </div>
+
         <div id="chatbox">
             <!-- Los mensajes se añadirán aquí con JavaScript -->
         </div>
@@ -45,9 +52,28 @@
                 // Añade el mensaje del bot con la clase correcta
                 const botMessageHTML = `<p class="bot-message">${data.bot_response}</p>`;
                 chatbox.innerHTML += botMessageHTML;
-                chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll
-            });
-        }
+                const progressContainer = document.getElementById("progress-container");
+                const progressText = document.getElementById("progress-text");
+                const progressBar = document.getElementById("progress-bar-foreground");
+
+                if (data.question_number > 0) {
+                    // Si es una pregunta, mostramos y actualizamos la barra
+                    progressContainer.style.display = "block";
+                    const totalQuestions = 10;
+                    const percentage = (data.question_number / totalQuestions) * 100;
+
+                    progressText.innerText = `Pregunta ${data.question_number} de ${totalQuestions}`;
+                    progressBar.style.width = `${percentage}%`;
+                } else {
+                    // Si no es una pregunta (es el diagnóstico final), ocultamos la barra
+                    progressContainer.style.display = "none";
+                    progressBar.style.width = "0%"; // La reseteamos
+                }
+
+                chatbox.scrollTop = chatbox.scrollHeight;
+                            chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll
+                        });
+                    }
     </script>
 
 </body>

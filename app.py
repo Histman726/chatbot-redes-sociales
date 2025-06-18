@@ -28,23 +28,26 @@ def chat():
     # Creamos una lista para almacenar todos los textos de los mensajes del bot
     all_bot_messages = []
 
-    if bot_responses:
-        # Iteramos sobre CADA mensaje en la respuesta de Rasa
-        for response in bot_responses:
-            # Añadimos el texto de cada mensaje a nuestra lista
-            message_text = response.get("text")
-            if message_text:
-                all_bot_messages.append(message_text)
+    # --- LÓGICA NUEVA ---
+    current_question_number = 0
+    # Buscamos en los mensajes del bot si es una pregunta del test
+    for response in bot_responses:
+        text = response.get("text", "")
+        if text.strip().startswith(('1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.', '10.')):
+            try:
+                # Extraemos el número de la pregunta
+                current_question_number = int(text.split('.')[0])
+            except ValueError:
+                pass  # No es un número, ignorar
+        all_bot_messages.append(text)
 
-    # Si después de iterar no encontramos ningún mensaje de texto, usamos uno por defecto.
-    if not all_bot_messages:
-        final_bot_message = "Lo siento, no entendí tu mensaje."
-    else:
-        # Unimos todos los mensajes en un solo bloque de texto, separados por saltos de línea HTML (<br>)
-        final_bot_message = "<br>".join(all_bot_messages)
+    final_bot_message = "<br>".join(all_bot_messages)
 
-    # Devolvemos la respuesta completa del bot en formato JSON.
-    return jsonify({"bot_response": final_bot_message})
+    # Devolvemos la respuesta Y el número de la pregunta
+    return jsonify({
+        "bot_response": final_bot_message,
+        "question_number": current_question_number
+    })
 
 
 if __name__ == "__main__":

@@ -1,0 +1,19 @@
+{
+  "lookup": {
+    "rules": {},
+    "rule_only_slots": [],
+    "rule_only_loops": [],
+    "rules_for_loop_unhappy_path": {
+      "[{\"prev_action\": {\"action_name\": \"utter_empecemos_test\"}}, {\"active_loop\": {\"name\": \"diagnostic_form\"}, \"prev_action\": {\"action_name\": \"diagnostic_form\"}, \"user\": {\"intent\": \"iniciar_test\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"diagnostic_form\"}, \"prev_action\": {\"action_name\": \"utter_goodbye\"}, \"user\": {\"intent\": \"goodbye\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"utter_empecemos_test\"}}, {\"active_loop\": {\"name\": \"diagnostic_form\"}, \"prev_action\": {\"action_name\": \"diagnostic_form\"}, \"slots\": {\"red_social\": [1.0]}, \"user\": {\"intent\": \"affirm\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"utter_iamabot\"}}, {\"active_loop\": {\"name\": \"diagnostic_form\"}, \"prev_action\": {\"action_name\": \"diagnostic_form\"}, \"user\": {\"intent\": \"bot_challenge\"}}]": "do_not_predict_loop_action"
+    },
+    "rules_not_in_stories": [
+      "predicting default action with intent restart",
+      "predicting default action with intent session_start",
+      "handling active loops and forms - diagnostic_form",
+      "predicting default action with intent back"
+    ]
+  }
+}
