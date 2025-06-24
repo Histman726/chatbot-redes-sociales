@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot de Bienestar Digital</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+    <nav>
+    <div><strong>Desconéctate</strong></div>
+    <ul>
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('tips') }}">Tips</a></li>
+      <li><a href="{{ url_for('chat') }}">Chat</a></li>
+      <li><a href="{{ url_for('testimonios') }}">Testimonios</a></li>
+    </ul>
+  </nav>
+
+    <div class="chat-page-wrapper">
+        <div id="chat-container">
+            <div id="progress-container" style="display: none;">
+                <p id="progress-text">Pregunta 1 de 10</p>
+                <div id="progress-bar-background">
+                    <div id="progress-bar-foreground"></div>
+                </div>
+            </div>
+
+            <div id="chatbox">
+
+            </div>
+
+            <div id="input-container">
+                <input type="text" id="user-input" placeholder="Escribe un mensaje..." onkeydown="if (event.key === 'Enter') sendMessage()">
+                <button id="send-button" onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInputElement = document.getElementById("user-input");
+            const userInput = userInputElement.value;
+            const chatbox = document.getElementById("chatbox");
+
+            if (userInput.trim() === "") {
+                return; // No enviar mensajes vacíos
+            }
+
+            // Añade el mensaje del usuario al chatbox con la clase correcta
+            const userMessageHTML = `<p class="user-message">${userInput}</p>`;
+            chatbox.innerHTML += userMessageHTML;
+
+            userInputElement.value = ""; // Limpia el input
+
+            fetch("/chatbot", {
+                method: "POST",
+                body: JSON.stringify({ message: userInput }),
+                headers: { "Content-Type": "application/json" },
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Añade el mensaje del bot con la clase correcta
+                const botMessageHTML = `<p class="bot-message">${data.bot_response}</p>`;
+                chatbox.innerHTML += botMessageHTML;
+                const progressContainer = document.getElementById("progress-container");
+                const progressText = document.getElementById("progress-text");
+                const progressBar = document.getElementById("progress-bar-foreground");
+
+                if (data.question_number > 0) {
+                    // Si es una pregunta, mostramos y actualizamos la barra
+                    progressContainer.style.display = "block";
+                    const totalQuestions = 10;
+                    const percentage = (data.question_number / totalQuestions) * 100;
+
+                    progressText.innerText = `Pregunta ${data.question_number} de ${totalQuestions}`;
+                    progressBar.style.width = `${percentage}%`;
+                } else {
+                    // Si no es una pregunta (es el diagnóstico final), ocultamos la barra
+                    progressContainer.style.display = "none";
+                    progressBar.style.width = "0%"; // La reseteamos
+                }
+
+                chatbox.scrollTop = chatbox.scrollHeight;
+                            chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll
+                        });
+                    }
+    </script>
+
+</body>
+</html>

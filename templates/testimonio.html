@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testimonios | Desconéctate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background: #f3f7fa; color: #333; line-height: 1.6; }
+
+    nav {
+      background: #202020;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+    }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a { color: white; text-decoration: none; font-weight: 600; }
+
+    .hero {
+      background: linear-gradient(to right, #2c3e50, #4ca1af);
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+      border-radius: 0 0 30px 30px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 2rem;
+    }
+
+    .section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      color: #1f2d3d;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card i {
+      font-size: 2.5rem;
+      color: #0077cc;
+      margin-bottom: 1rem;
+    }
+
+    .card p {
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+
+    .card span {
+      display: block;
+      text-align: right;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .footer {
+      background: #202020;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div><strong>Desconéctate</strong></div>
+    <ul>
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('tips') }}">Tips</a></li>
+      <li><a href="{{ url_for('chat') }}">Chat</a></li>
+      <li><a href="{{ url_for('testimonios') }}">Testimonios</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <h1><i class="fas fa-heart"></i> Testimonios Reales</h1>
+    <p>Conoce historias de personas que decidieron reconectarse con lo que más importa.</p>
+  </header>
+
+  <section class="section">
+    <h2>Experiencias que inspiran</h2>
+
+    <div class="testimonials-grid">
+      <div class="card">
+        <i class="fas fa-quote-left"></i>
+        <p>“Pensé que solo perdía tiempo, pero descubrí que perdía mi paz. Este sitio me ayudó a recuperar el control.”</p>
+        <span>- Ana M., 22 años</span>
+      </div>
+      <div class="card">
+        <i class="fas fa-quote-left"></i>
+        <p>“Mi ansiedad bajó cuando comencé a limitar el uso de redes. El acompañamiento virtual fue clave.”</p>
+        <span>- Luis G., 29 años</span>
+      </div>
+      <div class="card">
+        <i class="fas fa-quote-left"></i>
+        <p>“Me gustó que el enfoque fuera comprensivo y no alarmista. Sentí apoyo, no juicio.”</p>
+        <span>- Valeria R., 19 años</span>
+      </div>
+      <div class="card">
+        <i class="fas fa-quote-left"></i>
+        <p>“Nunca pensé que desconectarme de Instagram unas horas al día me haría sentir más libre. Hoy lo recomiendo.”</p>
+        <span>- Roberto T., 27 años</span>
+      </div>
+      <div class="card">
+        <i class="fas fa-quote-left"></i>
+        <p>“No se trata de eliminar redes, sino de usarlas con propósito. Gracias por ayudarme a verlo así.”</p>
+        <span>- Karen S., 25 años</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Desconéctate | Proyecto Académico</p>
+  </footer>
+</body>
+</html>
+

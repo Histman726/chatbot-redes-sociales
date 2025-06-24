@@ -1,80 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot de Bienestar Digital</title>
-    <!-- AQUÍ ESTÁ EL ENLACE AL CSS EXTERNO -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desconéctate para Reconectarte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background: #f2f2f2; color: #222; line-height: 1.6; }
+    header, section, footer { padding: 2rem; max-width: 1200px; margin: auto; }
+    nav { background: #202020; color: #fff; display: flex; justify-content: space-between; padding: 1rem 2rem; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a { color: white; text-decoration: none; font-weight: 600; }
+    .hero { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; padding: 5rem 2rem; text-align: center; border-radius: 0 0 30px 30px; }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; max-width: 700px; margin: auto; }
+    .section { background: white; margin: 2rem 0; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .section h2 { margin-bottom: 1rem; font-size: 2rem; text-align: center; color: #1f2d3d; }
+    .form-group { margin: 1rem 0; }
+    input, textarea { width: 100%; padding: 0.75rem; margin-top: 0.5rem; border: 1px solid #ccc; border-radius: 5px; }
+    .cta-button { background: #0077cc; color: white; padding: 0.75rem 2rem; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 1rem; }
+    .cta-button:hover { background: #005fa3; }
+    .footer { background: #202020; color: white; text-align: center; padding: 2rem; margin-top: 4rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .info-block { background: #e8f4fc; padding: 1.5rem; border-radius: 10px; text-align: center; }
+    .info-block h3 { margin-bottom: 0.5rem; color: #0077cc; }
+  </style>
 </head>
 <body>
+  <nav>
+    <div><strong>Desconéctate</strong></div>
+    <ul>
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('tips') }}">Tips</a></li>
+      <li><a href="{{ url_for('chat') }}">Chat</a></li>
+      <li><a href="{{ url_for('testimonios') }}">Testimonios</a></li>
+    </ul>
+  </nav>
 
-    <div id="chat-container">
-        <div id="progress-container" style="display: none;">
-            <p id="progress-text">Pregunta 1 de 10</p>
-            <div id="progress-bar-background">
-                <div id="progress-bar-foreground"></div>
-            </div>
-        </div>
+  <header class="hero">
+    <h1>¿Redes sociales o jaula digital?</h1>
+    <p>Encuentra tu equilibrio digital. Te acompañamos a recuperar el control de tu tiempo, atención y bienestar emocional.</p>
+  </header>
 
-        <div id="chatbox">
-            <!-- Los mensajes se añadirán aquí con JavaScript -->
-        </div>
-        <div id="input-container">
-            <input type="text" id="user-input" placeholder="Escribe un mensaje..." onkeydown="if (event.key === 'Enter') sendMessage()">
-            <button id="send-button" onclick="sendMessage()">➤</button>
-        </div>
+  <section class="section">
+    <h2>¿Por qué desconectarte?</h2>
+    <div class="grid">
+      <div class="info-block">
+        <h3>Bienestar mental</h3>
+        <p>Reducir el uso excesivo de redes disminuye el estrés, ansiedad y mejora tu concentración.</p>
+      </div>
+      <div class="info-block">
+        <h3>Relaciones reales</h3>
+        <p>Dedicar tiempo de calidad a tus relaciones cara a cara fortalece tu conexión con los demás.</p>
+      </div>
+      <div class="info-block">
+        <h3>Productividad</h3>
+        <p>Al enfocarte sin interrupciones digitales, avanzas más rápido en tus metas personales y profesionales.</p>
+      </div>
     </div>
+  </section>
 
-    <script>
-        function sendMessage() {
-            const userInputElement = document.getElementById("user-input");
-            const userInput = userInputElement.value;
-            const chatbox = document.getElementById("chatbox");
+  <section class="section">
+    <h2>¿Qué ofrecemos?</h2>
+    <div class="grid">
+      <div class="info-block">
+        <h3>Chat de acompañamiento</h3>
+        <p>Un asistente empático que te escucha, orienta y te acompaña en tu proceso.</p>
+      </div>
+      <div class="info-block">
+        <h3>Tips personalizados</h3>
+        <p>Recomendaciones prácticas para reducir tu dependencia digital y reconectar contigo mismo.</p>
+      </div>
+      <div class="info-block">
+        <h3>Testimonios inspiradores</h3>
+        <p>Conoce casos de éxito de personas como tú que lograron transformar su relación con la tecnología.</p>
+      </div>
+    </div>
+  </section>
 
-            if (userInput.trim() === "") {
-                return; // No enviar mensajes vacíos
-            }
+  <section class="section" id="contacto">
+    <h2>Contáctanos</h2>
+    <form>
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" required />
+      </div>
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required />
+      </div>
+      <div class="form-group">
+        <label for="asunto">Asunto</label>
+        <textarea id="asunto" rows="3"></textarea>
+      </div>
+      <button class="cta-button" type="submit">Enviar</button>
+    </form>
+  </section>
 
-            // Añade el mensaje del usuario al chatbox con la clase correcta
-            const userMessageHTML = `<p class="user-message">${userInput}</p>`;
-            chatbox.innerHTML += userMessageHTML;
-
-            userInputElement.value = ""; // Limpia el input
-
-            fetch("/chat", {
-                method: "POST",
-                body: JSON.stringify({ message: userInput }),
-                headers: { "Content-Type": "application/json" },
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Añade el mensaje del bot con la clase correcta
-                const botMessageHTML = `<p class="bot-message">${data.bot_response}</p>`;
-                chatbox.innerHTML += botMessageHTML;
-                const progressContainer = document.getElementById("progress-container");
-                const progressText = document.getElementById("progress-text");
-                const progressBar = document.getElementById("progress-bar-foreground");
-
-                if (data.question_number > 0) {
-                    // Si es una pregunta, mostramos y actualizamos la barra
-                    progressContainer.style.display = "block";
-                    const totalQuestions = 10;
-                    const percentage = (data.question_number / totalQuestions) * 100;
-
-                    progressText.innerText = `Pregunta ${data.question_number} de ${totalQuestions}`;
-                    progressBar.style.width = `${percentage}%`;
-                } else {
-                    // Si no es una pregunta (es el diagnóstico final), ocultamos la barra
-                    progressContainer.style.display = "none";
-                    progressBar.style.width = "0%"; // La reseteamos
-                }
-
-                chatbox.scrollTop = chatbox.scrollHeight;
-                            chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll
-                        });
-                    }
-    </script>
-
+  <footer class="footer">
+    <p>&copy; 2025 Desconéctate | Proyecto Académico</p>
+  </footer>
 </body>
 </html>

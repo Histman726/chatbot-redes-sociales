@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tips para Desconectarte | Desconéctate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background: #eef3f7; color: #333; line-height: 1.6; }
+    header, section, footer { padding: 2rem; max-width: 1200px; margin: auto; }
+    nav { background: #202020; color: #fff; display: flex; justify-content: space-between; padding: 1rem 2rem; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav a { color: white; text-decoration: none; font-weight: 600; }
+    .hero { background: linear-gradient(to right, #1f4037, #99f2c8); color: white; padding: 4rem 2rem; text-align: center; border-radius: 0 0 30px 30px; }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; max-width: 700px; margin: auto; }
+
+    .section { background: white; margin: 2rem 0; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+    .section h2 { font-size: 2rem; text-align: center; color: #1f2d3d; margin-bottom: 2rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+
+    .tip-box {
+      background: #f0f9ff;
+      border-left: 6px solid #00aaff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+    }
+    .tip-box:hover {
+      transform: translateY(-4px);
+    }
+    .tip-box i {
+      font-size: 1.8rem;
+      color: #0077cc;
+      margin-bottom: 0.5rem;
+    }
+    .tip-box h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #0077cc;
+    }
+
+    .footer {
+      background: #202020;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div><strong>Desconéctate</strong></div>
+    <ul>
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('tips') }}">Tips</a></li>
+      <li><a href="{{ url_for('chat') }}">Chat</a></li>
+      <li><a href="{{ url_for('testimonios') }}">Testimonios</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <h1><i class="fas fa-lightbulb"></i> Tips para reconectarte</h1>
+    <p>Empieza hoy a construir una relación más sana con la tecnología y contigo mismo.</p>
+  </header>
+
+  <section class="section">
+    <h2>Consejos útiles para tu bienestar digital</h2>
+    <div class="grid">
+      <div class="tip-box">
+        <i class="fas fa-clock"></i>
+        <h3>Establece horarios</h3>
+        <p>Reserva momentos específicos del día para revisar redes sociales. Evita hacerlo justo al despertar o antes de dormir.</p>
+      </div>
+      <div class="tip-box">
+        <i class="fas fa-mobile-alt"></i>
+        <h3>Activa el modo sin distracciones</h3>
+        <p>Utiliza funciones como “No molestar” o “Tiempo de uso” para evitar interrupciones y tomar conciencia de tu tiempo conectado.</p>
+      </div>
+      <div class="tip-box">
+        <i class="fas fa-bell-slash"></i>
+        <h3>Desactiva notificaciones</h3>
+        <p>Reduce las alertas innecesarias para evitar distracciones constantes que afectan tu atención y descanso.</p>
+      </div>
+      <div class="tip-box">
+        <i class="fas fa-book-open"></i>
+        <h3>Practica hobbies sin pantalla</h3>
+        <p>Lee, dibuja, haz ejercicio, cocina o medita. Actividades offline te reconectan con tu mundo interior.</p>
+      </div>
+      <div class="tip-box">
+        <i class="fas fa-users"></i>
+        <h3>Conversa cara a cara</h3>
+        <p>Busca momentos para charlas presenciales o videollamadas profundas que fortalezcan tus relaciones reales.</p>
+      </div>
+      <div class="tip-box">
+        <i class="fas fa-seedling"></i>
+        <h3>Haz pausas digitales</h3>
+        <p>Establece días o bloques de tiempo sin tecnología para resetear tu mente y cuerpo.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Desconéctate | Proyecto Académico</p>
+  </footer>
+</body>
+</html>

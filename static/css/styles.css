@@ -1,99 +1,167 @@
-/* static/css/style.css */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
 
 body {
-    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #2c3e50, #4ca1af);
+    color: #f0f0f0;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     height: 100vh;
     margin: 0;
-    background-color: #f4f4f4;
+}
+
+nav {
+    background: #202020;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    width: 100%;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+nav a:hover {
+    color: #4ca1af; /* Un color de acento para el hover */
+}
+nav strong {
+    font-size: 1.2rem;
+}
+
+.chat-page-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    align-items: center;
 }
 
 #chat-container {
     width: 450px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 95%;
+    height: 700px;
+    max-height: 90vh;
+    background: rgba(32, 32, 32, 0.9);
+    border: 1px solid #444;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
-    background-color: white;
+    backdrop-filter: blur(10px);
 }
 
 #chatbox {
-    height: 500px;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
+    flex-grow: 1;
+    padding: 20px;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
+    gap: 12px;
+    scroll-behavior: smooth;
+}
+
+#chatbox::-webkit-scrollbar {
+    width: 8px;
+}
+#chatbox::-webkit-scrollbar-track {
+    background: transparent;
+}
+#chatbox::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 10px;
+    border: 2px solid transparent;
 }
 
 #chatbox p {
-    max-width: 80%;
-    padding: 8px 12px;
-    border-radius: 18px;
-    margin: 5px 0;
-    line-height: 1.4;
+    max-width: 85%;
+    padding: 12px 18px;
+    border-radius: 20px;
+    line-height: 1.5;
+    word-wrap: break-word;
 }
 
 .user-message {
-    background-color: #007bff;
+    background: #0077cc;
     color: white;
     align-self: flex-end;
-    border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 5px;
 }
 
 .bot-message {
-    background-color: #e9e9eb;
-    color: black;
+    background: #3a3a3a;
+    color: #e0e0e0;
     align-self: flex-start;
-    border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 5px;
 }
 
 #input-container {
     display: flex;
-    padding: 10px;
+    padding: 15px;
+    border-top: 1px solid #444;
 }
 
 #user-input {
     flex-grow: 1;
-    border: 1px solid #ccc;
-    border-radius: 18px;
-    padding: 10px;
+    border: 1px solid #555;
+    background: #2a2a2a;
+    color: white;
+    border-radius: 20px;
+    padding: 12px 18px;
     margin-right: 10px;
+}
+#user-input:focus {
+    outline: none;
+    border-color: #0077cc;
 }
 
 #send-button {
     border: none;
-    background-color: #007bff;
+    background-color: #0077cc;
     color: white;
-    padding: 10px 15px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     cursor: pointer;
-    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
 }
 
 #send-button:hover {
-    background-color: #0056b3;
+    background-color: #005fa3;
 }
 
-/* static/css/style.css */
 #progress-container {
     padding: 10px 15px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #444;
     text-align: center;
+    background-color: rgba(0,0,0,0.2);
 }
 #progress-bar-background {
     width: 100%;
-    background-color: #e0e0e0;
+    background-color: #555;
     border-radius: 5px;
-    height: 10px;
+    height: 8px;
 }
 #progress-bar-foreground {
-    width: 0%; /* Empezará en 0% */
+    width: 0%;
     height: 100%;
-    background-color: #007bff;
+    background-color: #0077cc;
     border-radius: 5px;
-    transition: width 0.3s ease-in-out; /* Animación suave */
+    transition: width 0.3s ease-in-out;
 }

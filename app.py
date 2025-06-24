@@ -1,19 +1,29 @@
-# app.py
-
 from flask import Flask, request, jsonify, render_template
 import requests
 
 app = Flask(__name__)
 
-
-@app.route("/")
+@app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template('index.html')
+
+@app.route('/tips')
+def tips():
+    return render_template('tips.html')
+
+@app.route('/testimonios')
+def testimonios():
+    return render_template('testimonios.html')
+
+
+@app.route("/chat")
+def chat():
+    return render_template("chat.html")
 
 
 # --- FUNCIÓN CORREGIDA ---
-@app.route("/chat", methods=["POST"])
-def chat():
+@app.route("/chatbot", methods=["POST"])
+def chatbot():
     user_message = request.json.get("message")
 
     # Envía el mensaje del usuario al servidor de Rasa
